@@ -1,3 +1,2 @@
 export { CounterActions } from "./slices/counter.slice";
-
-export default {};
+export { ConfirmActions } from "./slices/confirm.slice";

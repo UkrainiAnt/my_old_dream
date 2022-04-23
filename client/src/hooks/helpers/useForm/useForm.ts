@@ -108,6 +108,7 @@ export default function useForm<
     validateField,
     resetErrors,
     onSubmit,
+    isError: Object.keys(errors).length > 0,
     getInputProps: getInputProps,
   };
 }

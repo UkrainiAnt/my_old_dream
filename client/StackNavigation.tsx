@@ -1,11 +1,20 @@
 import React from "react";
-import { HomeScreen, LoginScreen, RegisterScreen } from "./src/screens";
+import {
+  HomeScreen,
+  LoginScreen,
+  RegisterScreen,
+  EnterConfirm,
+  ChatScreen,
+} from "./src/screens";
 import {
   CardStyleInterpolators,
   createStackNavigator,
   StackNavigationOptions,
 } from "@react-navigation/stack";
 import { useAuthState } from "./src/hooks/helpers";
+
+import { useAppSelector } from "hooks/redux";
+import { codeSelector } from "store/selectors/confirm.selectors";
 
 const Stack = createStackNavigator();
 
@@ -16,6 +25,8 @@ const HomeScreenOptions: StackNavigationOptions = {
 const StackNavigation = () => {
   const { user } = useAuthState();
 
+  const code = useAppSelector(codeSelector);
+
   return (
     <Stack.Navigator initialRouteName={user ? "home" : "login"}>
       {user ? (
@@ -25,10 +36,24 @@ const StackNavigation = () => {
               cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
             }}
           >
+            {code ? (
+              <Stack.Screen
+                options={HomeScreenOptions}
+                name="confirm"
+                component={EnterConfirm}
+              />
+            ) : (
+              <Stack.Screen
+                options={HomeScreenOptions}
+                name="home"
+                component={HomeScreen}
+              />
+            )}
+
             <Stack.Screen
               options={HomeScreenOptions}
-              name="home"
-              component={HomeScreen}
+              name="chat"
+              component={ChatScreen}
             />
           </Stack.Group>
         </>

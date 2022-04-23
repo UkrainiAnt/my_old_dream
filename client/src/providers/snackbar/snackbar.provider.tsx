@@ -12,9 +12,11 @@ const SnackbarProvider: FC = (props) => {
   const [text, setText] = useState<string>("");
   const [isOpen, setOpen] = useState<boolean>(false);
   const [closable, setClosable] = useState<boolean>(false);
+  const [color, setColor] = useState<string>("");
 
   const open = ({ closable, color, text }: SnackbarPayload) => {
     setText(text);
+    setColor(color);
     setClosable(closable);
     setOpen(true);
   };

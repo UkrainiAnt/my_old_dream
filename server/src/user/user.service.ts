@@ -18,7 +18,6 @@ export class UserService {
 	}
 
 	async getUserStats(userId: number): Promise<User> {
-		console.log(userId);
 		const userWithStats = await this.prisma.user.findFirst({
 			where: {
 				id: userId,

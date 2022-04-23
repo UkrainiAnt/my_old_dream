@@ -11,8 +11,34 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { FirebaseModule } from './firebase/firebase.module';
 import { StripeModule } from 'nestjs-stripe';
 
+import { MailerModule } from '@nestjs-modules/mailer';
+import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter';
+import { MailModule } from './mail/mail.module';
+
 @Module({
 	imports: [
+		MailerModule.forRoot({
+			transport: {
+				host: 'smtp.gmail.com',
+				port: 1025,
+				ignoreTLS: true,
+				secure: false,
+				auth: {
+					user: process.env.USER_EMAIL,
+					pass: process.env.USER_PASSWORD,
+				},
+			},
+			defaults: {
+				from: '"nest-modules" <modules@nestjs.com>',
+			},
+			template: {
+				dir: __dirname + '/templates',
+				adapter: new PugAdapter(),
+				options: {
+					strict: true,
+				},
+			},
+		}),
 		StripeModule.forRoot({
 			apiKey: process.env.STRIPE_SECRET_KEY,
 			apiVersion: '2020-08-27',
@@ -28,6 +54,8 @@ import { StripeModule } from 'nestjs-stripe';
 		UserModule,
 		FileModule,
 		FirebaseModule,
+		MailerModule,
+		MailModule,
 	],
 	controllers: [PrismaController],
 	providers: [PrismaService],

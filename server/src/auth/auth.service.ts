@@ -6,7 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
 export interface IToken {
-	acess_token: string;
+	accessToken: string;
 }
 
 @Injectable()
@@ -17,7 +17,7 @@ export class AuthService {
 		private config: ConfigService,
 	) {}
 
-	async login(dto: LoginDto): Promise<{ acess_token: string }> {
+	async login(dto: LoginDto): Promise<{ accessToken: string }> {
 		const dbUser = await this.prisma.user.findFirst({
 			where: {
 				email: dto.email,
@@ -37,7 +37,7 @@ export class AuthService {
 		return this.signToken(dto.email, dbUser.id);
 	}
 
-	async register(dto: RegisterDto): Promise<{ acess_token: string }> {
+	async register(dto: RegisterDto): Promise<{ accessToken: string }> {
 		const dbUser = await this.prisma.user.findFirst({
 			where: {
 				email: dto.email,
@@ -70,7 +70,7 @@ export class AuthService {
 			const newUser = await this.prisma.user.create({
 				data: {
 					email: dto.email,
-					password: 'dskldkjdskjlskljdsksdskl',
+					password: 'somePassword',
 					name: dto.name,
 					picture: dto.picture,
 				},
@@ -85,7 +85,7 @@ export class AuthService {
 	async signToken(
 		email: string,
 		userId: number,
-	): Promise<{ acess_token: string }> {
+	): Promise<{ accessToken: string }> {
 		const payload = {
 			sub: userId,
 			email,
@@ -97,7 +97,7 @@ export class AuthService {
 		});
 
 		return {
-			acess_token: token,
+			accessToken: token,
 		};
 	}
 }

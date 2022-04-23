@@ -15,16 +15,19 @@ export default class UserService {
       data: payload,
     });
 
-    AsyncStorage.setItem("token", data.acess_token);
+    AsyncStorage.setItem("token", data.accessToken);
   }
 
   static async register(payload: RegisterPayload) {
     const { data } = await axiosInstance("auth/register", {
       method: "POST",
-      data: payload,
+      data: {
+        ...payload,
+        picture: `https://avatars.dicebear.com/api/micah/${payload.name}.svg`,
+      },
     });
 
-    AsyncStorage.setItem("token", data.acess_token);
+    AsyncStorage.setItem("token", data.accessToken);
   }
 
   static async updateUser(id: number, payload: IUpdateUserPayload) {
@@ -33,16 +36,16 @@ export default class UserService {
       data: payload,
     });
 
-    AsyncStorage.setItem("token", data.acess_token);
+    AsyncStorage.setItem("token", data.accessToken);
   }
 
-  static async singnInWithProvider(credentials: RegisterPayload) {
+  static async signInWithProvider(credentials: RegisterPayload) {
     const { data } = await axiosInstance("auth/provider", {
       method: "POST",
       data: credentials,
     });
 
-    AsyncStorage.setItem("token", data.acess_token);
+    AsyncStorage.setItem("token", data.accessToken);
   }
 
   static async getCurrentUser(): Promise<AxiosResponse<IUser>> {

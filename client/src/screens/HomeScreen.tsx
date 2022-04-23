@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import { Layout } from "components/layout";
-import { HomeScreenContent } from "components/pages/Home";
+import { default as HomeScreenContent } from "components/pages/home";
 
 const HomeScreen = () => {
   return (
@@ -20,6 +20,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#24293e",
   },
 });

@@ -22,7 +22,7 @@ const useAuthMutations = () => {
 
   const signInWithProvider = useMutation(
     async (payload: RegisterPayload) =>
-      await AuthService.singnInWithProvider(payload),
+      await AuthService.signInWithProvider(payload),
     {
       onSuccess: () => {
         navigator.navigate("home" as never, {} as never);

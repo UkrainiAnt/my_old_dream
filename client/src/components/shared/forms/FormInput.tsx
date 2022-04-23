@@ -10,11 +10,11 @@ interface FormInputProps {
   value: string;
   error: string;
   onChangeText: (val: string) => void;
-  Icon: any;
   iconName: string;
   placeholder?: string;
   iconColor?: string;
   label: string;
+  mode?: "outlined" | "flat";
 }
 
 const FormInput: React.FC<FormInputProps> = (props) => {
@@ -23,9 +23,9 @@ const FormInput: React.FC<FormInputProps> = (props) => {
     onChangeText,
     label,
     value,
-    Icon,
     iconName,
     placeholder,
+    mode = "flat",
     iconColor = "#ccc",
   } = props;
 
@@ -33,10 +33,18 @@ const FormInput: React.FC<FormInputProps> = (props) => {
     <TextInput
       label={label}
       style={styles.input}
-      right={<TextInput.Icon name={iconName} color={iconColor} />}
+      activeOutlineColor={error ? colors.error : colors.blue}
+      mode={mode}
+      right={
+        <TextInput.Icon
+          name={iconName}
+          color={error ? colors.error : iconColor}
+        />
+      }
       placeholder={placeholder}
-      activeUnderlineColor={colors.blue}
+      activeUnderlineColor={error ? colors.error : colors.blue}
       autoComplete={false}
+      error={!!error}
       value={value}
       onChangeText={onChangeText}
     />

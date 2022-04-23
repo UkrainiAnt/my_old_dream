@@ -1,17 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
-
-import { Tabs } from "./tabs";
 
 export const Layout: React.FC = (props) => {
   const { children } = props;
 
-  return (
-    <View style={styles.wrapper}>
-      {children}
-      <Tabs />
-    </View>
-  );
+  return <View style={styles.wrapper}>{children}</View>;
 };
 
 const styles = StyleSheet.create({

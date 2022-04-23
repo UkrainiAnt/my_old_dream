@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, View } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
 import React from "react";
 import { useForm } from "hooks/helpers";
 import { FormInput } from "components/shared/forms";
@@ -12,8 +12,16 @@ import { RegisterPayload } from "models";
 import { SocialButtons } from ".";
 import { styles } from "../styles";
 import LottieView from "lottie-react-native";
+import { useNavigation } from "@react-navigation/native";
+import { MailService } from "service";
+import { generateCode } from "helpers";
+
+import { useAppDispatch } from "hooks/redux";
+import { ConfirmActions } from "store/actions";
 
 const LoginForm = () => {
+  const navigation = useNavigation();
+
   const form = useForm({
     initialValues: { email: "", password: "", name: "" },
     validationRules: {
@@ -29,13 +37,24 @@ const LoginForm = () => {
   });
 
   const { registerUser } = useAuthState();
+  const dispatch = useAppDispatch();
 
-  const register = () => {
+  const register = async () => {
     const newUser: RegisterPayload = form.values;
+
+    form.validate();
     if (!form.validate()) {
       return;
     }
-    registerUser(newUser);
+
+    await registerUser(newUser);
+
+    const code = generateCode();
+
+    dispatch(ConfirmActions.setCode(code));
+    await MailService.sendConfirmationEmail({ code, email: form.values.email });
+
+    navigation.navigate("confirm" as any);
   };
 
   return (
@@ -72,7 +91,7 @@ const LoginForm = () => {
 
       <Button
         width={320}
-        bgColor={colors.blue}
+        bgColor={form.isError ? colors.error : colors.blue}
         onPress={register}
         text="Register"
       />
