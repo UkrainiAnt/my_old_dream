@@ -1,7 +1,7 @@
-import { StyleSheet } from "react-native";
 import React from "react";
-import { Input } from "react-native-elements";
 import { colors } from "variables";
+import { Text, TextInput } from "react-native-paper";
+import { StyleSheet } from "react-native";
 
 export const isErrorStyle = (isError: boolean) =>
   isError ? { borderColor: "#ef4444", color: "#ef4444" } : {};
@@ -14,12 +14,14 @@ interface FormInputProps {
   iconName: string;
   placeholder?: string;
   iconColor?: string;
+  label: string;
 }
 
 const FormInput: React.FC<FormInputProps> = (props) => {
   const {
     error,
     onChangeText,
+    label,
     value,
     Icon,
     iconName,
@@ -28,43 +30,24 @@ const FormInput: React.FC<FormInputProps> = (props) => {
   } = props;
 
   return (
-    <Input
-      placeholder={placeholder}
+    <TextInput
+      label={label}
       style={styles.input}
-      inputStyle={{ color: colors.text }}
-      inputContainerStyle={{
-        ...styles.inputContainerStyle,
-        ...isErrorStyle(!!error),
-      }}
+      right={<TextInput.Icon name={iconName} color={iconColor} />}
+      placeholder={placeholder}
+      activeUnderlineColor={colors.blue}
+      autoComplete={false}
       value={value}
       onChangeText={onChangeText}
-      errorMessage={error ? error : ""}
-      rightIcon={
-        <Icon
-          style={isErrorStyle(!!error)}
-          name={iconName}
-          size={24}
-          color={iconColor}
-        />
-      }
     />
   );
 };
 
 export default FormInput;
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   input: {
     width: 320,
-    borderBottomColor: "transparent",
-  },
-  inputContainerStyle: {
-    borderRadius: 10,
-    paddingHorizontal: 12,
-    padding: 6,
-    backgroundColor: colors.form,
-    borderColor: "transparent",
-    borderBottomWidth: 2,
-    color: colors.text,
+    marginBottom: 14,
   },
 });

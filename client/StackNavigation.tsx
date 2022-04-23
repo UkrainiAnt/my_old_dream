@@ -5,7 +5,7 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from "@react-navigation/stack";
-import { useAuthState } from "./src/hooks";
+import { useAuthState } from "./src/hooks/helpers";
 
 const Stack = createStackNavigator();
 

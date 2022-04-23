@@ -1,7 +1,7 @@
 import { StyleSheet, View, ViewStyle } from "react-native";
 import React from "react";
-import { useRouting } from "hooks";
-import { useAuthState } from "hooks";
+import { useRouting } from "hooks/helpers";
+import { useAuthState } from "hooks/helpers";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { colors } from "variables";
 

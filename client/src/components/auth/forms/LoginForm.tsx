@@ -1,19 +1,25 @@
-import { View } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
 import React from "react";
-import { useForm } from "hooks";
-import LottieView from "lottie-react-native";
-import { styles as styleSheet } from "./styles";
-import { AuthPageNav } from "./";
+import { useForm } from "hooks/helpers";
+import { styles as styleSheet } from "../styles";
 import { FormInput } from "components/shared/forms";
 import { Button } from "components/shared";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { GoogleButton } from "./";
+import { SocialButtons, AuthNavigation } from ".";
 import { FieldValidator } from "helpers/FieldValidator";
 import { colors } from "variables";
-import { useAuthState } from "hooks";
+import { useAuthState } from "hooks/helpers";
+import LottieView from "lottie-react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginForm = () => {
   const { loginUser } = useAuthState();
+
+  const navigation = useNavigation();
+
+  const startRegistering = () => {
+    navigation.navigate("register" as any);
+  };
 
   const form = useForm({
     initialValues: { email: "", password: "" },
@@ -37,18 +43,20 @@ const LoginForm = () => {
   };
 
   return (
-    <View style={styleSheet.wrapper}>
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={200}
+      style={styleSheet.wrapper}
+    >
       <LottieView
-        style={styleSheet.iconStyle}
         loop={false}
+        style={styleSheet.iconStyle}
         autoPlay
-        speed={0.6}
-        source={require("../../assets/animations/87845-hello.json")}
+        source={require("assets/animations/84745-message.json")}
       />
 
       <FormInput
         iconName="mail"
-        iconColor={colors.accent}
+        iconColor={colors.blue}
         Icon={Ionicons}
         {...form.getInputProps("email")}
       />
@@ -56,26 +64,31 @@ const LoginForm = () => {
       <FormInput
         iconName="lock"
         Icon={MaterialIcons}
-        iconColor={colors.accent}
+        iconColor={colors.blue}
         {...form.getInputProps("password")}
       />
 
       <Button
         bgColor={colors.accent}
         onPress={login}
+        style={{ borderRadius: 12 }}
         isLoading={false}
         text="Sign In"
-        width={290}
+        width={320}
       />
 
-      <AuthPageNav
-        link="register"
-        linkText="Sign Up"
-        text="do not have a account?,"
+      <Button
+        bgColor={colors.accent}
+        onPress={startRegistering}
+        mode={"outlined"}
+        style={{ marginVertical: 12 }}
+        isLoading={false}
+        text="Register"
+        width={320}
       />
 
-      <GoogleButton />
-    </View>
+      <SocialButtons />
+    </KeyboardAvoidingView>
   );
 };
 

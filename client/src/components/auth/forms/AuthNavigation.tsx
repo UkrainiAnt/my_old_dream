@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { useRouting } from "../../hooks";
+import { useRouting } from "hooks/helpers";
 import { TouchableOpacity } from "react-native";
 import { colors } from "variables";
 
-interface AuthPageNavProps {
+interface AuthNavigationProps {
   text: string;
   linkText: string;
   link: string;
   noOr?: boolean;
 }
 
-const AuthPageNav: React.FC<AuthPageNavProps> = (props) => {
+const AuthNavigation: React.FC<AuthNavigationProps> = (props) => {
   const { link, linkText, text, noOr = false } = props;
 
   const { navigateTo } = useRouting();
@@ -29,7 +29,7 @@ const AuthPageNav: React.FC<AuthPageNavProps> = (props) => {
   );
 };
 
-export default AuthPageNav;
+export default AuthNavigation;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   link: {
     fontWeight: "bold",
     fontSize: 16,
-    color: colors.accent,
+    color: colors.blue,
     marginRight: 5,
   },
 });

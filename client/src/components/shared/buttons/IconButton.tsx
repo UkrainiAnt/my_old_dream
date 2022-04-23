@@ -1,10 +1,10 @@
 import React from "react";
 import { TouchableOpacity, ViewStyle } from "react-native";
-import { ReactElement } from "react";
-import { Button } from "react-native-elements";
+import { IconButton as Button } from "react-native-paper";
+import { IconSource } from "react-native-paper/lib/typescript/components/Icon";
 
 interface IconButtonProps {
-  Icon: ReactElement<any, any>;
+  Icon: IconSource;
   onPress?: () => void;
   style?: ViewStyle;
   isButton?: boolean;
@@ -22,12 +22,9 @@ const IconButton: React.FC<IconButtonProps> = (props) => {
 
   if (isButton) {
     return (
-      <Button
-        type="outline"
-        icon={Icon}
-        onPress={onPress ? onPress : () => {}}
-        buttonStyle={{ ...style, borderRadius: isRounded ? 50 : 0 }}
-      />
+      <Button icon={Icon} onPress={onPress ? onPress : () => {}}>
+        {Icon}
+      </Button>
     );
   }
 

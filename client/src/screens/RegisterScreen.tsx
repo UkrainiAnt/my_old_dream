@@ -2,7 +2,9 @@ import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { RegisterForm } from "../components/auth";
+import { useKeyValue } from "hooks/helpers";
+import { RegisterForm } from "../components/auth/forms";
+
 const RegisterScreen = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -20,7 +22,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#24293e",
   },
   container: {
     marginBottom: 30,

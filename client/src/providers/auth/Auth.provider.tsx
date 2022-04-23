@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
-import { useToggle } from "../hooks";
+import { useToggle } from "../../hooks/helpers";
 import * as Google from "expo-google-app-auth";
 import { IUser, RegisterPayload } from "models";
 import { useQuery } from "react-query";
 import { AuthService } from "service";
-import { useAuthMutations } from "hooks";
+import { useAuthMutations } from "hooks/helpers";
 import { AxiosResponse } from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { config } from "config";
 import { initialContext, AuthContextProps } from "./Auth.context";
 
-const googgleConfig = {
+const googleConfig = {
   androidClientId: config.GOOGLE_CLIENT_ID,
   scopes: ["profile", "email"],
   permissions: ["public_profile", "gender", "email", "location"],
@@ -49,7 +49,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const signInWithGoogle = async () => {
     changeLoading(true);
 
-    Google.logInAsync(googgleConfig as any).then(async (loginResult) => {
+    Google.logInAsync(googleConfig as any).then(async (loginResult) => {
       if (loginResult.type === "success") {
         const { user } = loginResult;
         const googleUser = createGooglePayload(user);

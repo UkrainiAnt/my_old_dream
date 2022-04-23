@@ -1,13 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "./src/components/layout/toasts";
-import { AuthProvider } from "./src/providers";
+import { AuthProvider } from "./src/providers/auth";
 import StackNavigation from "./StackNavigation";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { store } from "store/store";
 import { Provider } from "react-redux";
 import { LogBox, View, StyleSheet } from "react-native";
-import { colors } from "variables";
+import { SnackbarProvider } from "providers/snackbar";
 
 LogBox.ignoreAllLogs();
 
@@ -21,7 +21,9 @@ export default function App() {
         <NavigationContainer>
           <QueryClientProvider client={client}>
             <AuthProvider>
-              <StackNavigation />
+              <SnackbarProvider>
+                <StackNavigation />
+              </SnackbarProvider>
             </AuthProvider>
           </QueryClientProvider>
         </NavigationContainer>
@@ -35,6 +37,5 @@ export default function App() {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: colors.bg,
   },
 });

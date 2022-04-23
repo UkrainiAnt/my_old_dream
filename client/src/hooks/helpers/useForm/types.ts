@@ -25,5 +25,5 @@ export interface UseForm<T> {
   onSubmit: (
     handleSubmit: (values: T) => any
   ) => (event?: React.FormEvent) => void;
-  getInputProps: any;
+  getInputProps: (key: keyof T) => any;
 }

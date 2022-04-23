@@ -86,6 +86,10 @@ export default function useForm<
 
   const getInputProps = <Key extends keyof InitialStateType>(field: Key) => ({
     value: values[field],
+    name: field,
+    label:
+      field.toString().split("").shift()?.toUpperCase() +
+      field.toString().slice(1),
     onChangeText: (val: string) => setFieldValue(field, val),
     error: (errors[field] as string) || undefined,
     placeholder:
@@ -104,6 +108,6 @@ export default function useForm<
     validateField,
     resetErrors,
     onSubmit,
-    getInputProps: getInputProps as any,
+    getInputProps: getInputProps,
   };
 }

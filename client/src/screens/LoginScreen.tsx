@@ -2,7 +2,7 @@ import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { LoginForm } from "../components/auth";
+import { LoginForm } from "../components/auth/forms";
 
 const LoginScreen = () => {
   return (
@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#24293e",
   },
   container: {
     marginBottom: 30,
