@@ -1,13 +1,20 @@
-import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import React from "react";
 import { colors } from "variables";
 import { useInputValue } from "hooks/helpers";
-
-import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { IconButton } from "react-native-paper";
+import { FAB } from "react-native-paper";
 
 const ChatForm = () => {
   const { value: message, changeValue, cleanValue } = useInputValue("");
+
+  const behavior = Platform.OS === "ios" ? "padding" : "height";
 
   const sendMessage = () => {
     console.log(message);
@@ -26,33 +33,45 @@ const ChatForm = () => {
     }
   };
 
-  const buttonIcon = message ? (
-    <Ionicons name="send" size={20} color={colors.white} />
-  ) : (
-    <FontAwesome5 name="plus" size={20} color={colors.white} />
-  );
-
   return (
-    <View style={styles.wrapper}>
+    <KeyboardAvoidingView behavior={behavior} style={styles.wrapper}>
       <View style={styles.inputContainer}>
-        <IconButton icon={"smile"} />
+        <IconButton
+          style={styles.icon}
+          onPress={() => {}}
+          color={colors.lightBlue}
+          icon={"sticker-emoji"}
+        />
 
         <TextInput
-          style={{ flex: 1 }}
+          style={{ flex: 1, fontSize: 16 }}
           onChangeText={changeValue}
           value={message}
           placeholder="Type a message..."
         />
 
-        <IconButton style={{ marginRight: 10 }} icon={"camera"} />
+        <IconButton
+          style={styles.icon}
+          onPress={() => {}}
+          color={colors.lightBlue}
+          icon={"camera"}
+        />
 
-        <IconButton icon={"microphone"} />
+        <IconButton
+          style={styles.icon}
+          onPress={() => {}}
+          color={colors.lightBlue}
+          icon={"microphone"}
+        />
       </View>
 
-      <TouchableOpacity onPress={onPress} style={styles.buttonContainer}>
-        {buttonIcon}
-      </TouchableOpacity>
-    </View>
+      <FAB
+        icon={message ? "send" : "plus"}
+        onPress={() => {}}
+        small
+        style={{ backgroundColor: colors.lightBlue }}
+      />
+    </KeyboardAvoidingView>
   );
 };
 
@@ -68,9 +87,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.messageGray,
     flex: 1,
     flexDirection: "row",
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 16,
+    paddingVertical: 5,
+    paddingHorizontal: 6,
+
+    borderRadius: 40,
   },
   buttonContainer: {
     width: 42,
@@ -79,6 +99,10 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
+  },
+
+  icon: {
+    margin: 0,
   },
 
   button: {

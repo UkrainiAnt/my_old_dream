@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "variables";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -7,9 +8,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#f9fafb",
   },
   image: {
-    height: 50,
-    width: 50,
-    borderRadius: 30,
+    height: 55,
+    width: 55,
+    borderRadius: 13,
     marginRight: 10,
   },
   badgeContainer: {
@@ -21,13 +22,11 @@ const styles = StyleSheet.create({
     borderColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    left: 45,
-    top: 10,
   },
   badgeText: {
     color: "white",
-    fontSize: 12,
+    fontSize: 10,
+    fontWeight: "bold",
   },
   rightContainer: {
     flex: 1,
@@ -38,13 +37,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   name: {
-    fontWeight: "bold",
     fontSize: 18,
-    marginBottom: 3,
+    height: 25,
+    margin: 0,
+    padding: 0,
   },
   text: {
     color: "grey",
     marginRight: 4,
+    maxWidth: 300,
+    overflow: "hidden",
+  },
+
+  date: {
+    color: "#a3a3a3",
+    overflow: "hidden",
+    fontWeight: "bold",
   },
 });
 

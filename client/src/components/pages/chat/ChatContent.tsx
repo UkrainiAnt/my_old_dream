@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
 import { ChatHeader, ChatForm, ChatMessages } from "./";
 import { colors } from "variables";
 

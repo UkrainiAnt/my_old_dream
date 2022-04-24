@@ -13,7 +13,9 @@ const ChatMessages: FC<ChatMessagesProps> = (props) => {
   return (
     <FlatList
       data={messages}
-      style={{ width: "100%", flex: 1 }}
+      inverted
+      showsVerticalScrollIndicator={false}
+      style={{ width: "100%", flex: 1, marginTop: "auto" }}
       renderItem={({ item }) => <Message message={item} />}
       keyExtractor={(item) => item.id}
     />

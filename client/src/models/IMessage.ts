@@ -8,8 +8,6 @@ export interface IMessage<Type extends Object>
   createdAt: Date | string;
   updatedAt?: Date | string;
   status?: "SENT" | "DELIVERED" | "VIEWED";
-
-  user?: IUser;
 }
 
 export interface CreateMessagePayload<Type extends Object> {

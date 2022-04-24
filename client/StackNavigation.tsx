@@ -49,7 +49,15 @@ const StackNavigation = () => {
                 component={HomeScreen}
               />
             )}
+          </Stack.Group>
 
+          <Stack.Group
+            screenOptions={{
+              gestureDirection: "horizontal",
+              gestureEnabled: true,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          >
             <Stack.Screen
               options={HomeScreenOptions}
               name="chat"

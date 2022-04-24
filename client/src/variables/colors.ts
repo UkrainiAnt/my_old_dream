@@ -13,7 +13,9 @@ const colors = {
   grayBg: "#e2e8f0",
   lightGray: "#f8fafc",
   white: "#fff",
+  header: "#3a76f0",
   messageGray: "#e9e9e9",
+  messageBlue: "#3b82f6",
 };
 
 export default colors;
