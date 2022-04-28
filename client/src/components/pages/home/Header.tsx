@@ -7,14 +7,18 @@ import { Title } from "react-native-paper";
 
 import { useAuthState } from "hooks/helpers";
 import { SearchBar } from "./";
-import { fakeUser } from "mocks/FakeUser";
+import { useEffect } from "react";
 
 import { useToggle } from "hooks/helpers";
 
 const Header = () => {
-  const { user } = useAuthState();
+  const { logout, user } = useAuthState();
 
   const [isSearching, toggleSearch] = useToggle(false);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <View style={{ backgroundColor: colors.blue }}>
@@ -22,7 +26,9 @@ const Header = () => {
         <View style={styles.actionsContainer}>
           <IconButton icon="menu" onPress={() => {}} color={colors.white} />
 
-          <Image style={styles.avatar} source={{ uri: fakeUser.picture }} />
+          <IconButton icon="logout" onPress={logout} color={colors.white} />
+
+          <Image style={styles.avatar} source={{ uri: user?.picture }} />
           <Title style={{ padding: 0, color: colors.white }}>Signal</Title>
         </View>
 

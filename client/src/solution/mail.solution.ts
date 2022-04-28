@@ -5,7 +5,7 @@ export interface sendConfirmationCodePayload {
   email: string;
 }
 
-export default class MailService {
+export default class MailSolution {
   static async sendConfirmationEmail(
     payload: sendConfirmationCodePayload
   ): Promise<string> {

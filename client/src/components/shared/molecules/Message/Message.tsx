@@ -1,7 +1,7 @@
 import { IMessage } from "models";
 import { Pressable, Text, View } from "react-native";
 import { styles } from "./";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 import { dayts } from "lib/dayts";
@@ -24,11 +24,13 @@ const Message: FC<Message> = (props) => {
 
   return (
     <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-      <Avatar.Image
-        style={{ marginBottom: 10 }}
-        size={30}
-        source={{ uri: message.sender?.picture }}
-      />
+      {!isMe && (
+        <Avatar.Image
+          style={{ marginBottom: 10 }}
+          size={32}
+          source={{ uri: message.sender?.picture }}
+        />
+      )}
       <Pressable
         onLongPress={() => console.log("long press action")}
         style={[
@@ -55,7 +57,7 @@ const Message: FC<Message> = (props) => {
 
         <View style={styles.infoContainer}>
           <Text style={{ ...styles.date, color: isMe ? "#94a3b8" : "#e2e8f0" }}>
-            {dayts(message.createdAt).fromNow()}
+            {dayts(message.createdAt).format("HH:m")}
           </Text>
           {isMe && <CheckIcon />}
         </View>

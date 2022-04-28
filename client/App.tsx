@@ -8,6 +8,9 @@ import { store } from "store/store";
 import { Provider } from "react-redux";
 import { LogBox, View, StyleSheet } from "react-native";
 import { SnackbarProvider } from "providers/snackbar";
+import { ChatProvider } from "providers/chat";
+
+import { MessageProvider } from "providers/message";
 
 LogBox.ignoreAllLogs();
 
@@ -21,9 +24,13 @@ export default function App() {
         <NavigationContainer>
           <QueryClientProvider client={client}>
             <AuthProvider>
-              <SnackbarProvider>
-                <StackNavigation />
-              </SnackbarProvider>
+              <ChatProvider>
+                <MessageProvider>
+                  <SnackbarProvider>
+                    <StackNavigation />
+                  </SnackbarProvider>
+                </MessageProvider>
+              </ChatProvider>
             </AuthProvider>
           </QueryClientProvider>
         </NavigationContainer>

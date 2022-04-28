@@ -5,7 +5,7 @@ import { styles as styleSheet } from "../styles";
 import { FormInput } from "components/shared/forms";
 import { Button } from "components/shared";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { SocialButtons, AuthNavigation } from ".";
+import { SocialButtons } from ".";
 import { FieldValidator } from "helpers/FieldValidator";
 import { colors } from "variables";
 import { useAuthState } from "hooks/helpers";

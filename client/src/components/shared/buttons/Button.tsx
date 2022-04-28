@@ -7,7 +7,7 @@ import { colors } from "variables";
 interface ButtonProps {
   onPress?: () => void;
   text?: string | ReactElement<any, any>;
-  bgColor?: string | keyof typeof colors;
+  bgColor?: keyof typeof colors;
   disabled?: boolean;
   isLoading?: boolean;
   mode?: "contained" | "outlined" | "text";

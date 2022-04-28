@@ -49,7 +49,7 @@ async function bootstrap() {
 	app.enableCors();
 
 	const PORT = process.env.PORT || 5001;
-	const HOST = '192.168.0.122';
+	const HOST = '192.168.0.106';
 
 	await app.listen(PORT, HOST, () =>
 		console.log('Server started on port ' + PORT),

@@ -2,85 +2,104 @@ import { IUser } from "models";
 
 const users: IUser[] = [
   {
-    id: "u1",
+    id: 6,
     email: "builo@gmail.com",
     password: "123123123hui",
     name: "Vadim",
     picture:
       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg",
-    status: "Hello there, how are you",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: "u2",
+    id: 2,
     email: "builo@gmail.com",
     password: "123123123hui",
     name: "Elon Musk",
     picture:
       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: "u3",
+    id: 3,
     email: "builo@gmail.com",
     password: "123123123hui",
     name: "Jeff",
     picture:
       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/jeff.jpeg",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: "u4",
+    id: 4,
     email: "builo@gmail.com",
     password: "123123123hui",
     name: "Zuck",
     picture:
       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/zuck.jpeg",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: "u5",
+    id: 5,
     email: "builo@gmail.com",
     password: "123123123hui",
     name: "Graham",
     picture:
       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/graham.jpg",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: "u6",
+    id: 6,
     email: "builo@gmail.com",
     password: "123123123hui",
     name: "Biahaze",
     picture:
       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/biahaze.jpg",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: "u7",
+    id: 7,
     email: "builo@gmail.com",
     password: "123123123hui",
     name: "Sus?",
     picture:
-      "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/1.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs57_SablHh3zfbbD-UM4gZXfV13L3vP6VxtIi55Jd4oNPKsHVD1FI84q22pB9Omy03IY&usqp=CAU",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: "u8",
+    id: 8,
     email: "builo@gmail.com",
     password: "123123123hui",
     name: "Daniel",
     picture:
-      "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/2.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs57_SablHh3zfbbD-UM4gZXfV13L3vP6VxtIi55Jd4oNPKsHVD1FI84q22pB9Omy03IY&usqp=CAU",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: "u9",
+    id: 9,
     email: "builo@gmail.com",
     password: "123123123hui",
     name: "Carlos",
     picture:
-      "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/3.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs57_SablHh3zfbbD-UM4gZXfV13L3vP6VxtIi55Jd4oNPKsHVD1FI84q22pB9Omy03IY&usqp=CAU",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
-    id: "u10",
+    id: 10,
     email: "builo@gmail.com",
     password: "123123123hui",
     name: "Angelina Jolie",
     picture:
-      "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/4.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs57_SablHh3zfbbD-UM4gZXfV13L3vP6VxtIi55Jd4oNPKsHVD1FI84q22pB9Omy03IY&usqp=CAU",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
 ];
 

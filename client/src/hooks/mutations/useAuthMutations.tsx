@@ -1,6 +1,5 @@
-import React from "react";
 import { useMutation } from "react-query";
-import { AuthService } from "service";
+import { AuthSolution } from "solution";
 import { LoginPayload, RegisterPayload } from "models";
 import { useNavigation } from "@react-navigation/native";
 
@@ -8,11 +7,11 @@ const useAuthMutations = () => {
   const navigator = useNavigation();
 
   const register = useMutation(
-    async (payload: RegisterPayload) => await AuthService.register(payload)
+    async (payload: RegisterPayload) => await AuthSolution.register(payload)
   );
 
   const login = useMutation(
-    async (payload: LoginPayload) => await AuthService.login(payload),
+    async (payload: LoginPayload) => await AuthSolution.login(payload),
     {
       onSuccess: () => {
         navigator.navigate("home" as never, {} as never);
@@ -22,7 +21,7 @@ const useAuthMutations = () => {
 
   const signInWithProvider = useMutation(
     async (payload: RegisterPayload) =>
-      await AuthService.signInWithProvider(payload),
+      await AuthSolution.signInWithProvider(payload),
     {
       onSuccess: () => {
         navigator.navigate("home" as never, {} as never);

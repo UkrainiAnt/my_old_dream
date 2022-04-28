@@ -16,6 +16,8 @@ const colors = {
   header: "#3a76f0",
   messageGray: "#e9e9e9",
   messageBlue: "#3b82f6",
+
+  addHeader: "#0369a1",
 };
 
 export default colors;

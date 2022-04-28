@@ -10,27 +10,34 @@ import { colors } from "variables";
 import { useInputValue } from "hooks/helpers";
 import { IconButton } from "react-native-paper";
 import { FAB } from "react-native-paper";
+import { useMessageContext, useChatContext } from "hooks/context";
+
+import { CreateMessagePayload } from "models";
+import { useAuthState } from "hooks/helpers";
 
 const ChatForm = () => {
   const { value: message, changeValue, cleanValue } = useInputValue("");
-
   const behavior = Platform.OS === "ios" ? "padding" : "height";
 
-  const sendMessage = () => {
-    console.log(message);
-    cleanValue();
-  };
+  const { createMessage } = useMessageContext();
+  const { user } = useAuthState();
+  const { selectedChat } = useChatContext();
 
-  const showMore = () => {
-    console.log("show more");
-  };
-
-  const onPress = () => {
-    if (message) {
-      sendMessage();
-    } else {
-      showMore();
+  const onCreateMessage = () => {
+    if (!message) {
+      return;
     }
+
+    const newMessage: CreateMessagePayload<string> = {
+      body: message,
+      type: "text",
+      senderId: user!.id,
+      chatId: +selectedChat!.id,
+      additionData: [],
+    };
+    cleanValue();
+
+    createMessage(newMessage);
   };
 
   return (
@@ -38,7 +45,6 @@ const ChatForm = () => {
       <View style={styles.inputContainer}>
         <IconButton
           style={styles.icon}
-          onPress={() => {}}
           color={colors.lightBlue}
           icon={"sticker-emoji"}
         />
@@ -47,6 +53,7 @@ const ChatForm = () => {
           style={{ flex: 1, fontSize: 16 }}
           onChangeText={changeValue}
           value={message}
+          onSubmitEditing={onCreateMessage}
           placeholder="Type a message..."
         />
 
@@ -67,7 +74,7 @@ const ChatForm = () => {
 
       <FAB
         icon={message ? "send" : "plus"}
-        onPress={() => {}}
+        onPress={message ? onCreateMessage : onCreateMessage}
         small
         style={{ backgroundColor: colors.lightBlue }}
       />

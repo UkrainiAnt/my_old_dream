@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -13,10 +14,11 @@ model User {
   name  String?
   password String
   picture String
-  products Product[]
-  comments Comment[]
-  orders Order[]
-  bio String?
+  phone String?
+
+  messages Message[]
+
+  chats Chat[]
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -24,74 +26,44 @@ model User {
   @@map("users")
 }
 
-model Product {
-  id Int @default(autoincrement()) @id
-  title String
-  image String 
-  images String[]
-  description String
-  options String[]
-  avgRating Float 
-  price Int 
-  oldPrice Int 
-  userId Int
+model Message {
+  id Int @id @default(autoincrement()) 
+  body String
+  additionData String[]
 
-  shippings Shipping[]
+  type String
+
+  chatId Int
+  chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+  senderId Int
+  sender User @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  reactions Reaction[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+}
+
+model Reaction {
+  id Int @id @default(autoincrement()) 
+  body String 
+  messages Message[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+} 
 
-  likes Like[]
+model Chat {
+  id Int @id @default(autoincrement()) 
   
-  owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  comments Comment[]
+  isGroup Boolean @default(false)
+  name String @default("untitled") 
+  picture String?
 
-  @@map("products")
-}
-
-model Comment {
-  id Int @default(autoincrement()) @id
-  userId Int
-  productId  Int
-  body String 
-  timeStamp DateTime @default(now()) 
-  updatedAt DateTime @updatedAt
+  users User[]
   
-  rait Int
-
-  owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  @@map("comments")
-}
-
-model Order {
-  id Int @default(autoincrement()) @id
-  totalCost Int
-  userId Int
-  timeStamp DateTime @default(now()) 
-  shippings Shipping[]
-  owner User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  @@map("orders")
-}
-
-model Shipping {
-  id Int @default(autoincrement()) @id
-  productId Int
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  orderId Int
-  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  
-  count Int
-}
-
-model Like {
-  id Int @default(autoincrement()) @id
-  userId Int 
-  productId Int
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  messages Message[]
 }
 

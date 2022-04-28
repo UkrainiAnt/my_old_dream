@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { axiosInstance } from "lib/axios";
 import { AxiosResponse } from "axios";
 
-export default class UserService {
+export default class UserSolution {
   static async login(payload: LoginPayload): Promise<any> {
     const { data } = await axiosInstance("auth/login", {
       method: "POST",
@@ -23,7 +23,8 @@ export default class UserService {
       method: "POST",
       data: {
         ...payload,
-        picture: `https://avatars.dicebear.com/api/micah/${payload.name}.svg`,
+        picture:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Vladimir_Putin_17-11-2021_%28cropped_2%29.jpg/250px-Vladimir_Putin_17-11-2021_%28cropped_2%29.jpg",
       },
     });
 

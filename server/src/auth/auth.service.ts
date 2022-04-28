@@ -64,8 +64,6 @@ export class AuthService {
 			},
 		});
 
-		console.log(dbUser);
-
 		if (!dbUser) {
 			const newUser = await this.prisma.user.create({
 				data: {

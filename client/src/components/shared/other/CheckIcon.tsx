@@ -12,7 +12,7 @@ const CheckIcon: FC<CheckIconProps> = (props) => {
   const { sended = false, viewed = false } = props;
 
   return (
-    <View style={{ marginHorizontal: 6 }}>
+    <View style={{ marginHorizontal: 3 }}>
       <MaterialCommunityIcons
         color={colors.blue}
         name={!sended ? "circle-outline" : viewed ? "check-all" : "check-bold"}

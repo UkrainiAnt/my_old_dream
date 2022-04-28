@@ -4,7 +4,7 @@ import { useToggle } from "../../hooks/helpers";
 import * as Google from "expo-google-app-auth";
 import { IUser, RegisterPayload } from "models";
 import { useQuery } from "react-query";
-import { AuthService } from "service";
+import { AuthSolution } from "solution";
 import { useAuthMutations } from "hooks/helpers";
 import { AxiosResponse } from "axios";
 import { useNavigation } from "@react-navigation/native";
@@ -30,7 +30,7 @@ const AuthProvider: React.FC = ({ children }) => {
     isFetching,
   } = useQuery<AxiosResponse<IUser>>(
     "user",
-    async () => await AuthService.getCurrentUser(),
+    async () => await AuthSolution.getCurrentUser(),
     {
       onError: (e) => {
         setUser(null);
@@ -44,7 +44,7 @@ const AuthProvider: React.FC = ({ children }) => {
     useAuthMutations();
   const logout = () => {
     setUser(null);
-    AuthService.logoutUser();
+    AuthSolution.logoutUser();
   };
   const signInWithGoogle = async () => {
     changeLoading(true);

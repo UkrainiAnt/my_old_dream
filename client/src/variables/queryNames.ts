@@ -1,1 +1,4 @@
-export enum queryNames {}
+export default {
+  userSearch: "userSearch",
+  userChats: "userChats",
+};

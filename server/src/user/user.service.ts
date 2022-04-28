@@ -7,8 +7,33 @@ import { UpdateUserDto } from 'src/auth/dto';
 export class UserService {
 	constructor(private prisma: PrismaService) {}
 
-	async getAllUsers(): Promise<User[]> {
-		return await this.prisma.user.findMany();
+	async getAllUsers(userId: number): Promise<User[]> {
+		return await this.prisma.user.findMany({
+			where: {
+				NOT: {
+					id: userId,
+				},
+			},
+		});
+	}
+
+	async searchUsers(search: string) {
+		return await this.prisma.user.findMany({
+			where: {
+				OR: [
+					{
+						name: {
+							contains: search,
+						},
+					},
+					{
+						email: {
+							contains: search,
+						},
+					},
+				],
+			},
+		});
 	}
 
 	async deleteUser(userId: number): Promise<User> {
@@ -23,16 +48,20 @@ export class UserService {
 				id: userId,
 			},
 			include: {
-				_count: {
-					select: {
-						comments: true,
-						orders: true,
-						products: true,
-					},
-				},
+				_count: {},
 			},
 		});
 		return userWithStats;
+	}
+
+	async getUserById(userId: number): Promise<User> {
+		const currentUser = await this.prisma.user.findUnique({
+			where: {
+				id: userId,
+			},
+		});
+
+		return currentUser;
 	}
 
 	async updateUser(dto: UpdateUserDto, id: number) {
@@ -44,7 +73,6 @@ export class UserService {
 			data: {
 				picture: dto.picture,
 				name: dto.name,
-				bio: dto.bio,
 			},
 		});
 	}

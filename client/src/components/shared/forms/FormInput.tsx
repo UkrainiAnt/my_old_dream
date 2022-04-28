@@ -3,14 +3,17 @@ import { colors } from "variables";
 import { Text, TextInput } from "react-native-paper";
 import { StyleSheet } from "react-native";
 
+import { TextInputProps } from "react-native-paper/lib/typescript/components/TextInput/TextInput";
+
 export const isErrorStyle = (isError: boolean) =>
   isError ? { borderColor: "#ef4444", color: "#ef4444" } : {};
 
-interface FormInputProps {
-  value: string;
-  error: string;
+// @ts-ignore
+interface FormInputProps extends TextInputProps {
+  value?: string;
+  error?: string;
   onChangeText: (val: string) => void;
-  iconName: string;
+  iconName?: string;
   placeholder?: string;
   iconColor?: string;
   label: string;
@@ -21,20 +24,23 @@ const FormInput: React.FC<FormInputProps> = (props) => {
   const {
     error,
     onChangeText,
-    label,
-    value,
+    label = "",
+    value = "",
     iconName,
     placeholder,
     mode = "flat",
     iconColor = "#ccc",
+    ...other
   } = props;
 
   return (
     <TextInput
       label={label}
+      {...other}
       style={styles.input}
       activeOutlineColor={error ? colors.error : colors.blue}
       mode={mode}
+      textBreakStrategy={"highQuality"}
       right={
         <TextInput.Icon
           name={iconName}

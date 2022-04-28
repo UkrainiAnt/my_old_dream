@@ -5,10 +5,12 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     margin: 9,
+    marginVertical: 7,
     marginLeft: 3,
     paddingBottom: 21,
     borderRadius: 10,
     maxWidth: "75%",
+    minWidth: 60,
   },
   row: {
     flexDirection: "row",

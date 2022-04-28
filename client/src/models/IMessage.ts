@@ -7,11 +7,15 @@ export interface IMessage<Type extends Object>
   id: string;
   createdAt: Date | string;
   updatedAt?: Date | string;
+  sender?: IUser;
   status?: "SENT" | "DELIVERED" | "VIEWED";
 }
 
 export interface CreateMessagePayload<Type extends Object> {
-  sender?: IUser;
+  senderId: number;
+  chatId: number;
+  additionData?: string[];
   body: Type;
+
   type: message_type;
 }

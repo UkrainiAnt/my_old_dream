@@ -1,14 +1,15 @@
 import { StyleSheet, View } from "react-native";
-
-import { Contact } from "components/shared/molecules";
-import { Header } from ".";
-import { fakeRooms } from "mocks";
-import { FlatList } from "react-native";
+import { Header, Chats } from ".";
 import { FAB } from "react-native-paper";
 import { colors } from "variables";
+import { useNavigation } from "@react-navigation/native";
 
 const Content = () => {
-  const bigList = fakeRooms.concat(fakeRooms, fakeRooms);
+  const navigation = useNavigation();
+
+  const navigateToAddContact = () => {
+    navigation.navigate("add-contact" as any);
+  };
 
   return (
     <>
@@ -17,16 +18,10 @@ const Content = () => {
 
         <View style={{ height: 10 }}></View>
 
-        <FlatList
-          data={bigList}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <Contact contact={item} />}
-          showsVerticalScrollIndicator={false}
-        />
+        <Chats />
       </View>
       <FAB
-        label=""
-        onPress={() => {}}
+        onPress={navigateToAddContact}
         style={{
           bottom: 20,
           right: 10,

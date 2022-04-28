@@ -1,14 +1,14 @@
 import React from "react";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
-import { FileService } from "service";
+import { FileSolution } from "solution";
 import { useMutation } from "react-query";
 
 const useImageTake = (initialImage: string = "") => {
   const [image, setImage] = useState<string>(initialImage);
   const uploadFileMutation = useMutation(
     async (formData: FormData) => {
-      return await FileService.uploadFile(formData);
+      return await FileSolution.uploadFile(formData);
     },
     {
       onSuccess: () => {

@@ -14,6 +14,13 @@ import { StripeModule } from 'nestjs-stripe';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter';
 import { MailModule } from './mail/mail.module';
+import { MessageModule } from './message/message.module';
+import { ChatModule } from './chat/chat.module';
+import { ReactionModule } from './reaction/reaction.module';
+
+import { NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { AuthMiddleware } from './middleware';
+import { UserService } from './user/user.service';
 
 @Module({
 	imports: [
@@ -56,8 +63,15 @@ import { MailModule } from './mail/mail.module';
 		FirebaseModule,
 		MailerModule,
 		MailModule,
+		MessageModule,
+		ChatModule,
+		ReactionModule,
 	],
 	controllers: [PrismaController],
-	providers: [PrismaService],
+	providers: [PrismaService, UserService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+	configure(consumer: MiddlewareConsumer) {
+		consumer.apply(AuthMiddleware).forRoutes('(.*)');
+	}
+}

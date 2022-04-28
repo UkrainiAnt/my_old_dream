@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface ConfirmServiceProps {
+interface ConfirmSolutionProps {
   code: string;
 }
 
-const initialState: ConfirmServiceProps = {
+const initialState: ConfirmSolutionProps = {
   code: "",
 };
 
 const slice = createSlice({
-  name: "confirmService",
+  name: "confirmSolution",
   initialState,
   reducers: {
     setCode: (state, action: PayloadAction<string>) => {

@@ -13,7 +13,7 @@ import { SocialButtons } from ".";
 import { styles } from "../styles";
 import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
-import { MailService } from "service";
+import { MailSolution } from "solution";
 import { generateCode } from "helpers";
 
 import { useAppDispatch } from "hooks/redux";
@@ -52,7 +52,10 @@ const LoginForm = () => {
     const code = generateCode();
 
     dispatch(ConfirmActions.setCode(code));
-    await MailService.sendConfirmationEmail({ code, email: form.values.email });
+    await MailSolution.sendConfirmationEmail({
+      code,
+      email: form.values.email,
+    });
 
     navigation.navigate("confirm" as any);
   };

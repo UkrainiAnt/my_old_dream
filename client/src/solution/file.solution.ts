@@ -1,6 +1,6 @@
 import { config } from "config";
 
-export default class FileService {
+export default class FileSolution {
   static async uploadFile<T extends FormData>(formData: T): Promise<string> {
     console.log("file upload started");
     const result = await fetch(config.API_URL + "file/upload", {

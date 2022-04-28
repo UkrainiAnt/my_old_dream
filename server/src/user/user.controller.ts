@@ -1,4 +1,4 @@
-import { Body, Controller, Param } from '@nestjs/common';
+import { Body, Controller, Param, Req } from '@nestjs/common';
 import { UserService } from './user.service';
 import { GetUser } from './decorators';
 import { UseGuards } from '@nestjs/common';
@@ -6,6 +6,9 @@ import { JwtGuard } from '../auth/guards';
 import { Get, Put, Delete } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { UpdateUserDto } from 'src/auth/dto';
+import { Request } from 'express';
+
+import { Query } from '@nestjs/common';
 
 @Controller('users')
 export class UserController {
@@ -13,7 +16,7 @@ export class UserController {
 
 	@UseGuards(JwtGuard)
 	@Get('me')
-	getCurrrentUser(@GetUser() currentUser: User) {
+	getCurrentUser(@GetUser() currentUser: User) {
 		return currentUser;
 	}
 
@@ -25,8 +28,13 @@ export class UserController {
 	}
 
 	@Get('all')
-	getAllUsers() {
-		return this.userService.getAllUsers();
+	getAllUsers(@Param('userId') userId: number) {
+		return this.userService.getAllUsers(userId);
+	}
+
+	@Get('search')
+	searchUsers(@Query('search') search: string) {
+		return this.userService.searchUsers(search);
 	}
 
 	@UseGuards(JwtGuard)

@@ -1,16 +1,22 @@
-import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ChatHeader, ChatForm, ChatMessages } from "./";
 import { colors } from "variables";
 
-import { fakeDetailedChat } from "mocks";
+import { useChatContext } from "hooks/context";
+import { useAuthState } from "hooks/helpers";
 
 const ChatContent = () => {
+  const { selectedChat } = useChatContext();
+  const { user } = useAuthState();
+
+  const notMe = selectedChat?.users.find((item) => item.id !== user?.id);
+
   return (
     <View style={styles.wrapper}>
-      <ChatHeader user={fakeDetailedChat.members![0]} />
+      <ChatHeader user={notMe!} />
 
       <View style={styles.container}>
-        <ChatMessages messages={fakeDetailedChat.messages!} />
+        <ChatMessages />
 
         <ChatForm />
       </View>
